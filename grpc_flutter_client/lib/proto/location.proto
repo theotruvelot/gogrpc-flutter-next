@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option go_package = "github.com/theotruvelot/grpc-go/proto/location";
+
+package location;
+
+service LocationService {
+  rpc SendLocation(Location) returns (LocationResponse) {}
+  rpc SubscribeToLocations(SubscribeRequest) returns (stream Location) {}
+}
+
+message Location {
+  double latitude = 1;
+  double longitude = 2;
+  string device_id = 3;
+  int64 timestamp = 4;
+}
+
+message LocationResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message SubscribeRequest {
+  string subscriber_id = 1;
+}
